@@ -103,3 +103,8 @@ const obstaculosCards_encounter = [
 const obstaculosCards_encounter_extra = [
     "emboscada_(2).png",
 ]
+
+
+console.log("Encuentros Cards in card_names.js: ", encuentrosCards);
+console.log("Poder Cards in card_names.js: ", poderCards);
+console.log("Obstaculos Cards in card_names.js: ", obstaculosCards);
