@@ -69,14 +69,17 @@ function displayDecks(encuentros, poder, obstaculos) {
     // Clear previous content
     [encountersDeck, powerDeck, obstaclesDeck].forEach(deck => deck.innerHTML = '');
 
-    // Randomly select cards for each deck
-    const randomEncuentros = getRandomCards(encuentros, Math.ceil(pv / 10));
-    const randomPoder = getRandomCards(poder, players * 6);
-    const randomObstaculos = getRandomCards(obstaculos, players * 6);
+    // Add extra cards for power deck
+    poder = poder.concat(['refuerzos_(1).png']);
+    if (players > 2) {
+        poder = poder.concat(['refuerzos_(2).png']);
+    }
 
-    // Add extra cards to power and obstacles deck
-    addExtraCards(randomPoder, ['refuerzos_(1).png'], ['refuerzos_(2).png'], players);
-    addExtraCards(randomObstaculos, ['ladron.png', 'emboscada_(1).png'], ['emboscada_(2).png'], players);
+    // Add extra cards for obstacles deck
+    obstaculos = obstaculos.concat(['ladron.png', 'emboscada_(1).png']);
+    if (players > 2) {
+        obstaculos = obstaculos.concat(['emboscada_(2).png']);
+    }
 
     // Shuffle decks
     shuffleArray(encuentros);
@@ -91,6 +94,7 @@ function displayDecks(encuentros, poder, obstaculos) {
     deckSection.style.display = 'flex';
 }
 
+// Function to randomly select N cards from a deck
 function getRandomCards(deck, count) {
     let selected = [];
     for (let i = 0; i < count; i++) {
@@ -99,13 +103,6 @@ function getRandomCards(deck, count) {
         deck.splice(randomIndex, 1); // Remove the selected card from the deck
     }
     return selected;
-}
-
-function addExtraCards(deck, mandatoryCards, extraCards, players) {
-    deck.push(...mandatoryCards);
-    if (players > 2) {
-        deck.push(...extraCards);
-    }
 }
 
 function setupDeck(deckElement, cardArray, dir) {
