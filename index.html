@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DUN JOA Helper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+    <link rel="stylesheet" href="src/css/style.css">
+    <script src="src/js/card_names.js"></script>
+    <script src="src/js/script.js" defer></script>
+
+</head>
+<body>
+    <div class="center" id="mainMenu">
+        <h2>DUN JOA Helper</h2> <span class="subtitle">v1.0 (fanmade)</span>
+        <input type="number" id="pv" placeholder="PV" min="0" max="1000">
+        <input type="number" id="players" placeholder="Héroes" min="1" max="5">
+        <label>Maso de Obstáculos predefinido? <input type="checkbox" id="customObstacles"></label>
+        <button id="startGame">Nueva Partida</button>
+    </div>
+
+    <div id="loadingGifContainer" style="display: none; width: 300px; height: 300px; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+        <img src="assets/misc/loading.gif" alt="Loading..." style="width: 100%; height: 100%;">
+    </div>
+    
+    <button id="infoButton" onclick="openInfoWindow()">?</button>
+
+    <div id="deckSection" class="deck-container" style="display:none;">
+        <div id="encountersDeck" class="deck">
+            <h3>Encounters Deck</h3>
+            <div class="deck-content"><!-- Cards will be added here --></div>
+        </div>
+        <div id="powerDeck" class="deck">
+            <h3>Power Deck</h3>
+            <div class="deck-content"><!-- Cards will be added here --></div>
+        </div>
+        <div id="obstaclesDeck" class="deck">
+            <h3>Obstacles Deck</h3>
+            <div class="deck-content"><!-- Cards will be added here --></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+
+@font-face {
+    font-family: 'Macondo';
+    src: url('../../assets/misc/Macondo-Regular.ttf') format('truetype');
+    }
+
+body {
+    background-color: #000000;
+    color: #d8d8d8;
+    font-family: "Macondo", "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #999999;
+    }
+    
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.imageContainer img {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    border-radius: 10px;
+    background-color: #7c1818;
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    cursor: pointer;
+    font-size: 24px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 50%;
+    max-width: 400px;
+}
+
+select {
+    padding: 20px;
+    border-radius: 10px;
+    font-family: "Macondo", sans-serif;
+    font-size: 24px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+#mainMenu {
+    display: block;
+    background-image: url("../../assets/misc/wallpaper_app.jpg");
+    background-position: center;
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    margin: 0 auto; /* Center horizontally */
+    display: block; /* Ensure they take the full line */
+}
+
+#mainMenu button {
+    /* background-color: #7c1818; */
+    background-color: rgba(124, 24, 24, 0.95);
+    width: 50%;
+    max-width: 300px;
+    margin: 0 auto; /* Center horizontally */
+    display: block; /* Ensure they take the full line */
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+#mainMenu input {
+    font-family: "Macondo", sans-serif;
+    font-size: 20px;
+    width: 50%; /* Adjust as needed */
+    margin: 0 auto; /* Center horizontally */
+    display: block; /* Ensure they take the full line */
+}
+
+#mainMenu label {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* This ensures vertical alignment is centered */
+    width: fit-content; /* Adjust the width to fit the content */
+    margin: 10px auto; /* Center the label horizontally */
+}
+
+#mainMenu label input[type="checkbox"] {
+    width: auto; /* Resets the width to default for checkboxes */
+    margin: 0 5px; /* Adjusts spacing to the right of the checkbox */
+}
+
+
+
+#infoButton {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    background-color: #4a4949;
+    color: white;
+    padding: 10px 20px;
+    font-size: 26px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    max-width: none;
+    border-radius: 50%;
+}
+
+
+h1, button, option {
+    font-family: "Macondo", "Arial", sans-serif; /* Added "Macondo" font */
+}
+
+/* DECKS */
+
+.deck-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.deck {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    min-width: 150px; /* Adjust as needed */
+}
+
+.deck h3 {
+    margin-bottom: 10px;
+}
+
+.deck-content {
+    /* Style for the content area of each deck */
+}
+
+.card-img {
+    width: 50%; /* Resize the card images */
+    height: auto;
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+}
+
+@media (min-width: 601px) {
+    /* Media query for desktop screens */
+    .imageContainer img {
+        max-width: 25%; /* Reduce the size to 50% */
+    }
+}
+
+@media (max-width: 600px){
+    button {
+        width: 100%;
+    }
+
+    #mainMenu {
+        background-size: 80% auto;
+        background-position: center bottom;
+        background-attachment: fixed;
+    }
+}
