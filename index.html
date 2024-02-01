@@ -24,6 +24,18 @@
     
     <button id="infoButton" onclick="openInfoWindow()">?</button>
 
+    <!-- Obstaculos Selection Modal -->
+    <div id="obstaculosModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Seleccione las cartas de Obstáculos</h3>
+            <div id="obstaculosChoices"><!-- Obstaculos cards will be populated here --></div>
+            <button id="selectAll">Seleccionar todas</button>
+            <button id="unselectAll">Deseleccionar todas</button>
+            <button id="confirmObstaculos">Confirmar Selección</button>
+        </div>
+    </div>
+
     <div id="deckSection" class="deck-container" style="display:none;">
         <div id="encountersDeck" class="deck">
             <h3>Encuentros</h3>

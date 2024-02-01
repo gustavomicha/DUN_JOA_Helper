@@ -149,7 +149,23 @@ h1, button, option {
 .deck-container {
     display: flex;
     justify-content: space-around;
+    align-items: stretch;
     padding: 20px;
+}
+
+.deck-content {
+    /* Style for the content area of each deck */
+    display: flex; /* Use flex layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    max-height: 50vh; /* Set a maximum height as a percentage of the viewport height */
+    max-width: 30vw; /* Set a maximum width as a percentage of the viewport width */
+}
+
+.card-img {
+    max-width: 50%; /* Ensure the image does not exceed the container width */
+    max-height: 100%; /* Ensure the image does not exceed the container height */
+    object-fit: contain; /* Scale the image to maintain aspect ratio while fitting within the element's content box */
 }
 
 .deck {
@@ -162,16 +178,6 @@ h1, button, option {
 
 .deck h3 {
     margin-bottom: 10px;
-}
-
-.deck-content {
-    /* Style for the content area of each deck */
-}
-
-.card-img {
-    width: 50%; /* Resize the card images */
-    height: auto;
-    cursor: pointer; /* Change cursor to indicate it's clickable */
 }
 
 #returnButton {
@@ -191,6 +197,52 @@ h1, button, option {
     /* Add additional styling as needed */
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 10px;
+    color: black; /* Change text color to black */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#selectAll, #unselectAll {
+    background-color: #808080; /* Gray background */
+    font-size: 18px; /* Adjust font size */
+    width: 25%;
+}
+
+#confirmObstaculos {
+    padding: 20px 40px; /* Keep padding larger */
+    font-size: 24px; /* Keep font size larger */
+}
 
 @media (max-width: 601px){
     button {
@@ -204,5 +256,14 @@ h1, button, option {
     }
     .imageContainer img {
         max-width: 25%; /* Reduce the size to 50% */
+    }
+
+    #selectAll, #unselectAll {
+        padding: 10px 20px; /* Smaller padding for smaller screens */
+        font-size: 16px; /* Smaller font size for smaller screens */
+    }
+    #confirmObstaculos {
+        padding: 15px 30px; /* Slightly smaller padding for smaller screens */
+        font-size: 20px; /* Slightly smaller font size for smaller screens */
     }
 }

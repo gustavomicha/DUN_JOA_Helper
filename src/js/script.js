@@ -25,6 +25,52 @@ document.getElementById('startGame').addEventListener('click', function() {
 
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    populateObstaculosModal();
+
+    // Event listener for Select All button
+    document.getElementById('selectAll').addEventListener('click', function() {
+        document.querySelectorAll('#obstaculosChoices input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = true;
+        });
+    });
+
+    // Event listener for Unselect All button
+    document.getElementById('unselectAll').addEventListener('click', function() {
+        document.querySelectorAll('#obstaculosChoices input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+    });
+});
+
+
+// Show the modal when the customObstacles checkbox is checked
+document.getElementById('customObstacles').addEventListener('change', function() {
+    const modal = document.getElementById('obstaculosModal');
+    if (this.checked) {
+        modal.style.display = 'block';
+    }
+});
+
+// Close the modal when the user clicks on <span> (x)
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('obstaculosModal').style.display = 'none';
+});
+
+// Handle the selection of cards
+document.getElementById('confirmObstaculos').addEventListener('click', function() {
+    const selectedCards = [];
+    document.querySelectorAll('#obstaculosChoices input[type="checkbox"]:checked').forEach(checkbox => {
+        selectedCards.push(checkbox.value);
+    });
+
+    // Update the obstaculosCards array or a new array to be used in deck building
+    obstaculosSelectedCards = selectedCards;
+
+    // Close the modal
+    document.getElementById('obstaculosModal').style.display = 'none';
+});
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -35,25 +81,20 @@ function shuffleArray(array) {
 function getRandomCards(deck, count) {
     let selected = [];
     let copyOfDeck = [...deck];
-    for (let i = 0; i < count; i++) {
+
+    // Use the minimum between the count and the deck size
+    let actualCount = Math.min(count, copyOfDeck.length);
+
+    for (let i = 0; i < actualCount; i++) {
         let randomIndex = Math.floor(Math.random() * copyOfDeck.length);
         selected.push(copyOfDeck[randomIndex]);
         copyOfDeck.splice(randomIndex, 1);
     }
+
     return selected;
 }
 
-function prepareDecks(encuentros, poder, obstaculos, players) {
-    if (players > 2) {
-        poder.push('refuerzos_(2).png');
-        obstaculos.push('emboscada_(2).png');
-    }
-    poder.push('refuerzos_(1).png');
-    obstaculos.push('ladron.png', 'emboscada_(1).png');
-    shuffleArray(encuentros);
-    shuffleArray(poder);
-    shuffleArray(obstaculos);
-}
+let obstaculosSelectedCards = []; // Global array to store user-selected cards
 
 function displayDecks(encuentros, poder, obstaculos, pv, players) {
     const deckSection = document.getElementById('deckSection');
@@ -63,14 +104,39 @@ function displayDecks(encuentros, poder, obstaculos, pv, players) {
 
     [encountersDeck, powerDeck, obstaclesDeck].forEach(deck => deck.innerHTML = '');
 
-    prepareDecks(encuentros, poder, obstaculos, players);
+    // Select random cards first
+    let randomEncuentros = getRandomCards(encuentros, Math.ceil(pv / 10));
+    let randomPoder = getRandomCards(poder, players * 6);
+    let randomObstaculos = getRandomCards(obstaculos, players * 6);
 
-    setupDeck(encountersDeck, getRandomCards(encuentros, Math.ceil(pv / 10)), 'encuentros');
-    setupDeck(powerDeck, getRandomCards(poder, players * 6), 'poder');
-    setupDeck(obstaclesDeck, getRandomCards(obstaculos, players * 6), 'obstaculos');
+    // Use selected cards if any, else use all cards for obstaculos
+    if (obstaculosSelectedCards.length > 0) {
+        randomObstaculos = getRandomCards(obstaculosSelectedCards, players * 6);
+    } else {
+        randomObstaculos = getRandomCards(obstaculos, players * 6);
+    }
+
+    // Add extra cards on top of the selected random cards
+    randomPoder = ['refuerzos_(1).png'].concat(randomPoder);
+    randomObstaculos = ['ladron.png', 'emboscada_(1).png'].concat(randomObstaculos);
+    if (players > 2) {
+        randomPoder = ['refuerzos_(2).png'].concat(randomPoder);
+        randomObstaculos = ['emboscada_(2).png'].concat(randomObstaculos);
+    }
+
+    // Shuffle the decks including the extra cards
+    shuffleArray(randomEncuentros);
+    shuffleArray(randomPoder);
+    shuffleArray(randomObstaculos);
+
+    // Setup each deck
+    setupDeck(encountersDeck, randomEncuentros, 'encuentros');
+    setupDeck(powerDeck, randomPoder, 'poder');
+    setupDeck(obstaclesDeck, randomObstaculos, 'obstaculos');
 
     deckSection.style.display = 'flex';
 }
+
 
 function setupDeck(deckElement, selectedCards, dir) {
     const backImage = createCardImage('fondo.png', dir, true);
@@ -105,7 +171,21 @@ function createCardImage(cardName, dir, isBack) {
 }
 
 document.getElementById('returnButton').addEventListener('click', function() {
-    document.getElementById('mainMenu').style.display = 'block';
-    document.getElementById('deckSection').style.display = 'none';
-    document.getElementById('returnButton').style.display = 'none';
+    location.reload();
 });
+
+
+function populateObstaculosModal() {
+    const modalContent = document.getElementById('obstaculosChoices');
+    obstaculosCards.forEach(card => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = card;
+        checkbox.checked = true; // By default, all cards are selected
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(card.replace('.png', ''))); 
+        modalContent.appendChild(label);
+        modalContent.appendChild(document.createElement('br'));
+    });
+}
