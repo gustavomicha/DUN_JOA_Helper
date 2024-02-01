@@ -189,3 +189,16 @@ function populateObstaculosModal() {
         modalContent.appendChild(document.createElement('br'));
     });
 }
+
+// Info Button
+var infoWindow = null;
+
+function openInfoWindow() {
+    // Check if the info window is already open
+    if (infoWindow && !infoWindow.closed) {
+        infoWindow.focus(); // If open, focus on the existing window
+    } else {
+        // If not open, open a new window with the specified text
+        infoWindow = window.open('src/html/info.html', '_blank', 'width=400,height=200');
+    }
+}
