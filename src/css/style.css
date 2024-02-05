@@ -168,13 +168,14 @@ h1, button, option {
     /* Style for the content area of each deck */
     display: flex; /* Use flex layout */
     justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    max-height: 50vh; /* Set a maximum height as a percentage of the viewport height */
-    max-width: 30vw; /* Set a maximum width as a percentage of the viewport width */
+}
+
+#deckSection .card-img {
+    cursor: pointer;
 }
 
 .card-img {
-    max-width: 50%; /* Ensure the image does not exceed the container width */
+    max-width: 75%; /* Ensure the image does not exceed the container width */
     max-height: 100%; /* Ensure the image does not exceed the container height */
     object-fit: contain; /* Scale the image to maintain aspect ratio while fitting within the element's content box */
 }
@@ -407,6 +408,107 @@ h1, button, option {
     cursor: pointer;
 }
 
+.played-cards-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.played-card {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+}
+
+.play-card-btn {
+    font-size: 20px; /* Makes text much smaller */
+    background-color: darkblue; /* Sets the background color to blue */
+    color: white; /* Sets the text color to white for contrast */
+    cursor: pointer; /* Changes cursor to a pointer on hover */
+    border: none; /* Removes the default border */
+    padding: 5px 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Optional: rounds the corners */
+    margin-top: 5px; /* Space from the counter */
+}
+.play-card-btn:hover {
+    background-color: blue; /* Darker shade on hover for visual feedback */
+}
+
+.remove-card-btn {
+    width: 20px; /* Much smaller width */
+    height: 20px; /* Much smaller height, equal to width to make it circular */
+    line-height: 18px; /* Adjust line height to vertically center the "X" */
+    font-size: 12px; /* Smaller font size for the "X" */
+    border-radius: 50%; /* Makes the button circular */
+    position: absolute;
+    top: -10px; /* Adjusts position to slightly overlap the top edge of the card */
+    right: 45px; /* Adjusts position to slightly overlap the right edge of the card */
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer; /* Changes cursor to a pointer on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Removes padding */
+}
+.remove-card-btn:hover {
+    background-color: darkred; /* Darker shade on hover for visual feedback */
+}
+
+.return-prev-card-btn {
+    background-color: #007bff; /* Blue color for the button */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.return-prev-card-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.next-card-btn {
+    background-color: #007bff; /* Blue color for the button */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.next-card-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust gap between buttons */
+    margin-top: 10px; /* Space from the deck or counter */
+}
+
+.return-prev-card-btn, .next-card-btn {
+    /* Common styling for buttons, adjust as needed */
+    padding: 5px 10px;
+    font-size: 16px; /* Adjust size as needed */
+    cursor: pointer;
+    max-width: 20%
+}
+
+.play-card-btn  {
+    /* Common styling for buttons, adjust as needed */
+    padding: 5px 10px;
+    font-size: 16px; /* Adjust size as needed */
+    cursor: pointer;
+}
+
 @media (max-width: 601px) {
     button {
         width: 50%;
@@ -446,6 +548,13 @@ h1, button, option {
     .deck {
         max-width: 100%; /* Full width for stacked containers */
         max-height: none; /* Remove max-height for stacked containers */
+    }
+
+    .deck-counter {
+        text-align: center;
+        margin-top: 10px;
+        color: white; /* Adjust based on your design */
+        font-size: 16px; /* Adjust based on your design */
     }
 
     #returnButton {

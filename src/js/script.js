@@ -24,7 +24,7 @@ document.getElementById('startGame').addEventListener('click', function() {
     displayDecks(encuentrosCards, poderCards, obstaculosCards, pv, players);
     document.getElementById('returnButton').style.display = 'block';
     document.getElementById('diceContainer').style.display = 'block';
-
+    document.getElementById('playedCardsContainer').style.display = 'block';
 
 });
 
@@ -144,25 +144,83 @@ function displayDecks(encuentros, poder, obstaculos, pv, players) {
 function setupDeck(deckElement, selectedCards, dir) {
     const backImage = createCardImage('fondo.png', dir, true);
     deckElement.appendChild(backImage);
-
+    const counter = document.createElement('div');
+    counter.className = 'deck-counter';
+    deckElement.parentNode.appendChild(counter);
     let currentCardIndex = 0;
+    let cardHistory = [];
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+
+    const returnPrevCardBtn = document.createElement('button');
+    returnPrevCardBtn.textContent = '←';
+    returnPrevCardBtn.className = 'return-prev-card-btn';
+
+    const playButton = document.createElement('button');
+    playButton.textContent = 'Fijar carta';
+    playButton.className = 'play-card-btn';
+
+    const nextCardBtn = document.createElement('button');
+    nextCardBtn.textContent = '→';
+    nextCardBtn.className = 'next-card-btn';
+
+    buttonContainer.appendChild(returnPrevCardBtn);
+    buttonContainer.appendChild(playButton);
+    buttonContainer.appendChild(nextCardBtn);
+    deckElement.parentNode.appendChild(buttonContainer);
+
+    returnPrevCardBtn.addEventListener('click', function() {
+        if (cardHistory.length > 0) {
+            const lastCard = cardHistory.pop();
+            const currentCard = deckElement.querySelector('.card-img:not(.back-of-deck)');
+            if (currentCard) currentCard.remove();
+            deckElement.appendChild(lastCard);
+            currentCardIndex--;
+            counter.textContent = `${currentCardIndex}/${selectedCards.length}`;
+        }
+    });
+
+    playButton.addEventListener('click', function() {
+        const lastShownCard = deckElement.querySelector('.card-img:not(.back-of-deck)');
+        if (lastShownCard) {
+            const cardClone = lastShownCard.cloneNode(true);
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'X';
+            removeButton.className = 'remove-card-btn';
+            const cardWrapper = document.createElement('div');
+            cardWrapper.className = 'played-card';
+            cardWrapper.appendChild(cardClone);
+            cardWrapper.appendChild(removeButton);
+            document.getElementById('playedCardsContainer').appendChild(cardWrapper);
+            removeButton.addEventListener('click', function() {
+                cardWrapper.remove();
+            });
+        }
+    });
+
+    nextCardBtn.addEventListener('click', showNextCard);
+
+    backImage.addEventListener('click', showNextCard);
 
     function showNextCard() {
         if (currentCardIndex < selectedCards.length) {
+            if (backImage.style.display !== 'none') backImage.style.display = 'none';
             const existingCard = deckElement.querySelector('.card-img:not(.back-of-deck)');
-            if (existingCard) existingCard.remove();
-
+            if (existingCard) {
+                cardHistory.push(existingCard.cloneNode(true));
+                existingCard.remove();
+            }
             const cardImage = createCardImage(selectedCards[currentCardIndex], dir, false);
             deckElement.appendChild(cardImage);
             currentCardIndex++;
-            cardImage.addEventListener('click', showNextCard);
-        } else {
-            backImage.style.display = 'block';
+            counter.textContent = `${currentCardIndex}/${selectedCards.length}`;
         }
     }
-
-    backImage.addEventListener('click', showNextCard);
 }
+
+
+
 
 function createCardImage(cardName, dir, isBack) {
     const cardImage = document.createElement('img');
