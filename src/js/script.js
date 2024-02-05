@@ -144,8 +144,10 @@ function displayDecks(encuentros, poder, obstaculos, pv, players) {
 function setupDeck(deckElement, selectedCards, dir) {
     const backImage = createCardImage('fondo.png', dir, true);
     deckElement.appendChild(backImage);
+
     const counter = document.createElement('div');
     counter.className = 'deck-counter';
+    counter.textContent = `0/${selectedCards.length}`; // Set initial counter text
     deckElement.parentNode.appendChild(counter);
     let currentCardIndex = 0;
     let cardHistory = [];
