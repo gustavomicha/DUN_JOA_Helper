@@ -220,6 +220,13 @@ h1, button, option {
     font-size: 32px !important;
 }
 
+.container {
+    display: flex;
+    flex-direction: row; /* Display children side by side */
+    justify-content: space-between; /* Add spacing between elements */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens (cellphone mode) */
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -294,6 +301,7 @@ h1, button, option {
     gap: 5px;
     align-items: center;
     font-size: 32px;
+    margin-top: 10px;
 }
 
 .points-row label {
