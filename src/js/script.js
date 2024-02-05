@@ -23,6 +23,8 @@ document.getElementById('startGame').addEventListener('click', function() {
     document.getElementById('pointsSection').style.display = 'block';
     displayDecks(encuentrosCards, poderCards, obstaculosCards, pv, players);
     document.getElementById('returnButton').style.display = 'block';
+    document.getElementById('diceContainer').style.display = 'block';
+
 
 });
 
@@ -258,3 +260,22 @@ function setPoints(elementId) {
         pointsElement.innerText = parseInt(newValue, 10);
     }
 }
+
+
+// Consider moving this to your CSS file if possible, adjusting the keyframes to match the size of your dice.
+document.getElementById('rollButton').addEventListener('click', function() {
+    let dice = document.getElementById('dice');
+    let numberOfFaces = 3;
+    let faceWidth = 656; // Adjust to the new size of your dice face
+
+    // Start the rolling animation
+    dice.style.animation = 'rollDice 0.5s forwards';
+
+    setTimeout(function() {
+        // Stop the rolling animation and display the result
+        let randomFace = Math.floor(Math.random() * numberOfFaces);
+        dice.style.animation = 'none'; // Remove the animation
+        dice.style.backgroundPosition = `-${randomFace * faceWidth}px 0`; // Set the final position
+    }, 500); // This timeout should match the animation duration
+});
+

@@ -352,6 +352,61 @@ h1, button, option {
     cursor: pointer;
 }
 
+
+.game-controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adjust gap between elements */
+}
+
+.points-container, .dice-container {
+    flex: 1;
+    min-width: 300px; /* Adjust based on your design needs */
+}
+
+
+/* dice */
+
+.dice-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #6a6767;
+    width: 25%; /* Adjust width as necessary */
+    height: 25%; /* Adjust height as necessary, or remove if not needed */
+    max-width: 40%;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+.dice {
+    width: 163px; /* Adjust based on layout */
+    height: 163px; /* Adjust based on layout */
+    background-image: url('../../assets/misc/dice_small.png');
+    background-position: 100 100; /* Center the background image in the dice element */
+    transition: background-position 0.5s steps(2);
+}
+
+#rollButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#rollButton:hover,
+#rollButton:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @media (max-width: 601px) {
     button {
         width: 50%;
@@ -392,7 +447,7 @@ h1, button, option {
         max-width: 100%; /* Full width for stacked containers */
         max-height: none; /* Remove max-height for stacked containers */
     }
-    
+
     #returnButton {
         padding: 10px 20px; /* Adjust padding for smaller screens */
         font-size: 16px; /* Adjust font size for smaller screens */
@@ -400,8 +455,8 @@ h1, button, option {
  
     .points-row label {
         font-size: 18px;
+        text-align: left;
     }
-
     .points-row span {
         font-size: 18px;
         width: 30px;
@@ -424,4 +479,23 @@ h1, button, option {
         padding-top: 20px;
         padding-bottom: 20px;
     }
+    .game-controls-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .points-container, .dice-container {
+        width: 90%; /* Adjust to ensure full width on mobile */
+        max-width: none; /* Remove max-width restrictions */
+    }
+    
+    .dice-container {
+        width: 90%; /* Adjust for full width on mobile */
+        margin: 20px auto;
+    }
+}
+
+@keyframes rollDice {
+    from { background-position: 0 0; }
+    to { background-position: -4048px 0; } /* Adjust this value */
 }
