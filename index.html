@@ -36,9 +36,9 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>Seleccione las cartas de Obstáculos</h3>
-            <div id="obstaculosChoices"><!-- Obstaculos cards will be populated here --></div>
             <button id="selectAll">Seleccionar todas</button>
             <button id="unselectAll">Deseleccionar todas</button>
+            <div id="obstaculosChoices"><!-- Obstaculos cards will be populated here --></div>
             <button id="confirmObstaculos">Confirmar Selección</button>
         </div>
     </div>
@@ -55,6 +55,25 @@
         <div id="obstaclesDeck" class="deck">
             <h3>Obstáculos</h3>
             <div class="deck-content"><!-- Cards will be added here --></div>
+        </div>
+    </div>
+
+    <div id="pointsSection" class="points-container" style="display: none;">
+        <div class="points-row">
+            <label>Puntos de Reserva: <span id="pointsReserva">0</span></label>
+            <button id="increaseReserva">+</button>
+            <button id="decreaseReserva">-</button>
+            <button id="setReserva">Editar Reserva</button>
+        </div>
+        <div class="points-row">
+            <label>Puntos de Logro (Héroes): <span id="pointsHeroes">0</span></label>
+            <button id="increaseHeroes">+</button>
+            <button id="decreaseHeroes">-</button>
+        </div>
+        <div class="points-row">
+            <label>Puntos de Logro (JOA): <span id="pointsJOA">0</span></label>
+            <button id="increaseJOA">+</button>
+            <button id="decreaseJOA">-</button>
         </div>
     </div>
 

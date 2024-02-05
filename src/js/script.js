@@ -20,6 +20,7 @@ document.getElementById('startGame').addEventListener('click', function() {
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('infoButton').style.display = 'none';
 
+    document.getElementById('pointsSection').style.display = 'block';
     displayDecks(encuentrosCards, poderCards, obstaculosCards, pv, players);
     document.getElementById('returnButton').style.display = 'block';
 
@@ -200,5 +201,60 @@ function openInfoWindow() {
     } else {
         // If not open, open a new window with the specified text
         infoWindow = window.open('src/html/info.html', '_blank', 'width=400,height=200');
+    }
+}
+
+// Add event listeners for Puntos de Reserva buttons
+document.getElementById('increaseReserva').addEventListener('click', function () {
+    increasePoints('pointsReserva');
+});
+
+document.getElementById('decreaseReserva').addEventListener('click', function () {
+    decreasePoints('pointsReserva');
+});
+
+document.getElementById('setReserva').addEventListener('click', function () {
+    setPoints('pointsReserva');
+});
+
+// Add event listeners for Puntos de Logro (Héroes) buttons
+document.getElementById('increaseHeroes').addEventListener('click', function () {
+    increasePoints('pointsHeroes');
+});
+
+document.getElementById('decreaseHeroes').addEventListener('click', function () {
+    decreasePoints('pointsHeroes');
+});
+
+// Add event listeners for Puntos de Logro (JOA) buttons
+document.getElementById('increaseJOA').addEventListener('click', function () {
+    increasePoints('pointsJOA');
+});
+
+document.getElementById('decreaseJOA').addEventListener('click', function () {
+    decreasePoints('pointsJOA');
+});
+
+function increasePoints(elementId) {
+    const pointsElement = document.getElementById(elementId);
+    let currentPoints = parseInt(pointsElement.innerText, 10);
+    currentPoints++;
+    pointsElement.innerText = currentPoints;
+}
+
+function decreasePoints(elementId) {
+    const pointsElement = document.getElementById(elementId);
+    let currentPoints = parseInt(pointsElement.innerText, 10);
+    if (currentPoints > 0) {
+        currentPoints--;
+        pointsElement.innerText = currentPoints;
+    }
+}
+
+function setPoints(elementId) {
+    const pointsElement = document.getElementById(elementId);
+    const newValue = prompt('Ingresar nuevo valor:');
+    if (!isNaN(newValue) && newValue !== null) {
+        pointsElement.innerText = parseInt(newValue, 10);
     }
 }

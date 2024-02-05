@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        .dice {
+            width: 656px; /* Set to the width of a single dice face */
+            height: 656px; /* Set to the height of the dice face */
+            background-image: url('../../assets/misc/dice.png'); /* Path to your sprite sheet */
+            background-position: 0 0; /* Start with the first face */
+            transition: background-position 0.5s steps(2); /* Smooth transition for the dice roll */
+        }
+
+        @keyframes rollDice {
+            from { background-position: 0 0; }
+            to { background-position: -4048px 0; } /* This should be 6 times the width of one face if you want to cycle through each face twice */
+        }
+
+        /* Add more CSS for button styling */
+        #rollButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="dice" class="dice"></div>
+    <button id="rollButton">Roll</button>
+
+    <script>
+        document.getElementById('rollButton').addEventListener('click', function() {
+            let dice = document.getElementById('dice');
+            let numberOfFaces = 3;
+            let faceWidth = 656; // The width of a single face of the dice
+
+            // Start the rolling animation
+            dice.style.animation = 'rollDice 0.5s forwards';
+
+            setTimeout(function() {
+                // Stop the rolling animation and display the result
+                let randomFace = Math.floor(Math.random() * numberOfFaces);
+                dice.style.animation = 'none'; // Remove the animation
+                dice.style.backgroundPosition = `-${randomFace * faceWidth}px 0`; // Set the final position
+            }, 500); // This timeout should match the animation duration
+        });
+    </script>
+</body>
+</html>
